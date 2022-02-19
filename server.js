@@ -1,17 +1,24 @@
 const express = require("express");
 const mysql = require("mysql");
 const path = require("path");
-
+const cors = require('cors')
 const app = express();
+
+var corsOptions = {
+    origin: 'http://localhost:3000/'
+}
+
+require("dotenv").config();
 
 const db = mysql.createConnection({
 	host: "localhost",
-	user: "root",
-	password: "password",
-	database: "nodemysql"
+	user: process.env.DB_USER,
+	password: process.env.DB_PASS,
+	database: process.env.DB_NAME
 });
 var exists = false;
 var msg = "";
+// app.use(cors(corsOptions))
 
 //Connect
 db.connect((error) => {
@@ -139,7 +146,7 @@ app.post('/delstudent/:id', (req,res) => {
 const port = process.env.port || 3000
 
 app.listen(port, () =>{
-	console.log("Server running on port 3000");
+	console.log(`Server running on port ${port}`);
 });
 
 module.exports = app
