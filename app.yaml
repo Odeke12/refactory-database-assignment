@@ -1,0 +1,7 @@
+runtime: nodejs
+env: flex
+env_variables:
+    DB_USER: "root"
+    DB_NAME: "nodemysql"
+    DB_PASS: "password"
+    DB_INSTANCE: "tranquil-garage-341811:us-central1:myinstance"

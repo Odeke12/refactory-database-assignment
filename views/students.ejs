@@ -60,7 +60,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="POST" action="/students/<%= student.id %>">
+        <form method="POST" action="/api/students/update/<%= student.id %>">
           <div class="form-group">
             <label for="formGroupExampleInput">First name</label>
             <input type="text" class="form-control" id="formGroupExampleInput" placeholder="First name" name="fname" value="<%= student.first_name%>">
@@ -79,16 +79,16 @@
           </div>
           <div class="form-group">
           <label for="inputState">Class</label>
-          <select id="inputState" class="form-control" name="class">
+          <select id="inputState" class="form-control" name="stclass">
             <option selected>Choose...</option>
-            <option <%= student.class === 'P1' ? "selected" : "" %> value="P1">P1</option>
-            <option <%= student.class === 'P2' ? "selected" : "" %> value="P2">P2</option>
-            <option <%= student.class === 'P3' ? "selected" : "" %> value="P3">P3</option>
-            <option <%= student.class === 'P4' ? "selected" : "" %> value="P4">P4</option>
+            <option <%= student.stclass === 'P1' ? "selected" : "" %> value="P1">P1</option>
+            <option <%= student.stclass === 'P2' ? "selected" : "" %> value="P2">P2</option>
+            <option <%= student.stclass === 'P3' ? "selected" : "" %> value="P3">P3</option>
+            <option <%= student.stclass === 'P4' ? "selected" : "" %> value="P4">P4</option>
             <!-- <option selected = <%= student.class == 'P4' ? "selected" : "" %> value="P4">P4</option> -->
-            <option <%= student.class === 'P5' ? "selected" : "" %> value="P5">P5</option>
-            <option <%= student.class === 'P6' ? "selected" : "" %> value="P6">P6</option>
-            <option <%= student.class === 'P7' ? "selected" : "" %> value="P7">P7</option>
+            <option <%= student.stclass === 'P5' ? "selected" : "" %> value="P5">P5</option>
+            <option <%= student.stclass === 'P6' ? "selected" : "" %> value="P6">P6</option>
+            <option <%= student.stclass === 'P7' ? "selected" : "" %> value="P7">P7</option>
           </select>
           <p id="class-error" style="display: none;"></p>
           </div>
@@ -104,7 +104,7 @@
 </div>
 
 <!-- Modal -->
-<form method="POST" action="/delstudent/<%= student.id %>">
+<form method="POST" action="/api/students/delete/<%= student.id %>">
 <div class="modal fade" id="delModal<%= n %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
