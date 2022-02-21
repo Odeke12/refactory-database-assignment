@@ -3,6 +3,7 @@ const mysql = require("mysql");
 const path = require("path");
 const cors = require('cors')
 const app = express();
+const student = require('./routes/studentRoute')
 
 var corsOptions = {
     origin: 'http://localhost:3000/'
@@ -18,7 +19,7 @@ const db = mysql.createConnection({
 });
 var exists = false;
 var msg = "";
-// app.use(cors(corsOptions))
+app.use(cors(corsOptions))
 
 //Connect
 db.connect((error) => {
@@ -40,6 +41,8 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use('/api/students', student)
+
 app.get("/", (req,res) => {
 	// var exists = false;
 	res.render("form", {
@@ -56,7 +59,7 @@ app.post("/", (req,res)=>{
 	db.query(sql1, product, (err, result) => {
 		if(err) throw err;
 		console.log(result);
-		if(req.body.first_name == undefined && req.body.last_name == undefined && req.body.reg_no == undefined && req.body.age == undefined && req.body.class == undefined){
+		if(req.body.first_name == undefined && req.body.last_name == undefined && req.body.reg_no == undefined && req.body.age == undefined && req.body.stclass == undefined){
 			return("Please provide valid arguments")
 		}
 		if(result.length > 0){
@@ -111,7 +114,7 @@ app.post('/students/:id', (req,res) => {
 	db.query(sql1, (err, result) => {
 		if(err) throw err;
 		console.log(result);
-		if(req.body.first_name == undefined && req.body.last_name == undefined && req.body.reg_no == undefined && req.body.age == undefined && req.body.class == undefined){
+		if(req.body.first_name == undefined && req.body.last_name == undefined && req.body.reg_no == undefined && req.body.age == undefined && req.body.stclass == undefined){
 			return("Please provide valid arguments")
 		}
 		if(result.length > 0){
@@ -120,7 +123,7 @@ app.post('/students/:id', (req,res) => {
 			console.log(exists);
 			msg = "Registration number exists";
 		}else{
-			const sql = `UPDATE students SET first_name="${req.body.fname}", last_name="${req.body.lname}", reg_no="${req.body.regno}", class="${req.body.class}", age =${req.body.age}  WHERE id=${req.params.id}`;
+			const sql = `UPDATE students SET first_name="${req.body.fname}", last_name="${req.body.lname}", reg_no="${req.body.regno}", class="${req.body.stclass}", age =${req.body.age}  WHERE id=${req.params.id}`;
 			db.query(sql, (err, result) => {
 				if(err) throw err;
 	
