@@ -20,6 +20,7 @@ const getAllStudents = async (req, res) => {
             students: result,
             check: exists
         });
+        return(result)
     }).catch(err => {
         console.log(err)
     })
@@ -32,6 +33,7 @@ const addStudents = async(req,res) => {
     msg = "Registration number exists"
     exists = true
     res.redirect('/api/students/')
+    return(msg)
     }else{
         const newStudent = await Student.create({
             first_name,last_name,reg_no,stclass,age
@@ -41,12 +43,18 @@ const addStudents = async(req,res) => {
 }
 
 const deleteStudent = async (req, res) => {
+    const regno = await Student.findOne({where:{reg_no:req.body.reg_no}});
+    if(regno){
     let id = req.params.id
     await Student.destroy( { where: { id: id } })
     res.redirect('/api/students/all')
+    }else{
+        return("Null")
+    }
 }
 
 const updateStudent = async (req, res) => {
+    const regno = await Student.findOne({where:{reg_no:req.body.reg_no}});
     let id = req.params.id
     await Student.update(req.body, { where: { id: id } })
     res.redirect('/api/students/all')
