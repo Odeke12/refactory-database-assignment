@@ -66,20 +66,20 @@ describe('POST ', () => {
 
 })
 
-describe('DELETE STUDENT ', () => {
-    it('Should delete a student', (done) => {
+// describe('DELETE STUDENT ', () => {
+//     it('Should delete a student', (done) => {
 
-        chai
-        .request(app)
-        .post('/api/students/delete/2')
-        // .type('form')
-        .end((err, response) => {
-            // response.body.should.have.property('message').eql('Student successfully added!');
-            response.should.have.status(400);
+//         chai
+//         .request(app)
+//         .post('/api/students/delete/2')
+//         // .type('form')
+//         .end((err, response) => {
+//             // response.body.should.have.property('message').eql('Student successfully added!');
+//             response.should.have.status(400);
 
-        done();
-        })
-    });
+//         done();
+//         })
+//     });
 
-})
+// })
 
